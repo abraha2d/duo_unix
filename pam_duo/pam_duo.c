@@ -96,8 +96,9 @@ __duo_prompt(void *arg, const char *prompt, char *buf, size_t bufsz)
 {
     char *p = NULL;
 
+    pam_info((pam_handle_t *)arg, "%s", prompt);
     if (pam_prompt((pam_handle_t *)arg, PAM_PROMPT_ECHO_ON, &p,
-        "%s", prompt) != PAM_SUCCESS || p == NULL) {
+        "") != PAM_SUCCESS || p == NULL) {
         return (NULL);
     }
     strlcpy(buf, p, bufsz);
